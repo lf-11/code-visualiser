@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Visualiser</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>Code Visualiser</h1>
+            <div class="control-group">
+                <label for="project-select">Project:</label>
+                <select id="project-select">
+                    <option>Loading...</option>
+                </select>
+            </div>
+        </div>
+        <div class="header-right">
+            <div id="project-context-controls" class="hidden">
+                <div class="file-controls-stack">
+                    <div class="control-group file-nav-group">
+                        <label for="file-select">File:</label>
+                        <button id="prev-file-btn" title="Previous File">&larr;</button>
+                        <select id="file-select" disabled>
+                            <option>Select a project first</option>
+                        </select>
+                        <button id="next-file-btn" title="Next File">&rarr;</button>
+                    </div>
+                    <div class="control-group hidden" id="issue-controls">
+                        <button id="jump-to-issue-btn" title="Jump to next file with issues">&raquo;</button>
+                        <span id="file-issue-indicator">This file has parsing issues</span>
+                    </div>
+                </div>
+                 <button id="parse-project-btn">Parse Project</button>
+                 <div id="project-parsing-status">
+                    <div id="project-parsing-summary"></div>
+                    <div id="unparsed-files-popup" class="hidden">
+                        <div class="popup-header">
+                            <strong>Files with incomplete parsing</strong>
+                            <button id="unparsed-files-close-btn">&times;</button>
+                        </div>
+                        <ul id="unparsed-files-list"></ul>
+                    </div>
+                </div>
+            </div>
+            <div id="status-message"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="tabs">
+            <button class="tab-link active" data-tab="tab-inspector">File Inspector</button>
+            <button class="tab-link" data-tab="tab-overview">File Overview</button>
+            <button class="tab-link" data-tab="tab-workflow">Workflow Overview</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="tab-inspector" class="tab-content active">
+            <div class="editor-container" id="editor-container">
+                <div class="elements-overlay" id="elements-overlay"></div>
+                <div class="code-view" id="code-view">
+                    <div class="line-numbers" id="line-numbers"></div>
+                    <pre><code id="code-content">Select a file to view its content.</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-overview" class="tab-content">
+            <div class="view-controls">
+                <span>View Mode:</span>
+                <div class="toggle-switch">
+                    <button id="view-by-kind" class="active">By Kind</button>
+                    <button id="view-by-position">By Position</button>
+                </div>
+            </div>
+             <div class="canvas-container" id="overview-canvas-container">
+                <!-- D3.js will render the SVG here -->
+            </div>
+        </div>
+
+        <div id="tab-workflow" class="tab-content">
+            <h2>Workflow Overview</h2>
+            <p>This feature is coming soon.</p>
+        </div>
+    </main>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="/static/file-inspector.js"></script>
+    <script src="/static/file-overview.js"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html> 
