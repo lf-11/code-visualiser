@@ -3,18 +3,19 @@ import sys
 import os
 import psycopg2
 import psycopg2.extras
+import json
 
 # Add the project root to the Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from core.database import get_db_connection
 from workflows.api_function_mapper import (
-    get_all_definitions as get_all_py_definitions,
-    get_imports,
-    build_alias_map,
-    build_call_graph,
     print_call_tree
 )
+
+# --- Configuration ---
+OUTPUT_FILE_PATH = "workflow_trace.json"
+# ---
 
 def get_py_api_endpoints(all_py_definitions):
     """Finds Python API endpoints and constructs their full paths."""
@@ -25,7 +26,7 @@ def get_py_api_endpoints(all_py_definitions):
     for definition in all_py_definitions:
         if definition['kind'] == 'function' and '@router' in definition['content']:
             # Updated regex to handle extra parameters in the decorator (like response_model)
-            match = re.search(r'@router\.(get|post|put|delete|patch)\("([^"]*)"', definition['content'])
+            match = re.search(r'@router\.(get|post|put|delete|patch)\s*\(\s*"([^"]+)"', definition['content'])
             if match:
                 method, path = match.groups()
                 # Normalize path parameters for matching, e.g., /users/{user_id} -> /users/{VAR}
@@ -34,15 +35,16 @@ def get_py_api_endpoints(all_py_definitions):
                 endpoints[f"{method.upper()} {full_path}"] = definition
     return endpoints
 
-def get_js_functions(cur, project_id):
-    """Fetches all Javascript functions from the database."""
+def get_all_py_elements(cur, project_id):
+    """Fetches all Python code elements from the database."""
     cur.execute("""
-        SELECT ce.id, ce.name, ce.content, f.path, ce.metadata
+        SELECT ce.id, ce.name, ce.content, f.path, ce.kind, ce.metadata
         FROM code_elements ce
         JOIN files f ON ce.file_id = f.id
-        WHERE f.project_id = %s AND ce.kind = 'function' AND f.path LIKE '%%.js' AND f.is_latest = TRUE;
+        WHERE f.project_id = %s AND f.path LIKE '%%.py' AND f.is_latest = TRUE;
     """, (project_id,))
     return cur.fetchall()
+
 
 def get_all_js_elements(cur, project_id):
     """Fetches all Javascript code elements from the database."""
@@ -54,28 +56,145 @@ def get_all_js_elements(cur, project_id):
     """, (project_id,))
     return cur.fetchall()
 
-def find_js_callees(caller_func, all_js_functions):
-    """Finds other JS functions called by a given JS function."""
-    callees = []
-    caller_content = caller_func.get('content', '')
-    if not caller_content:
-        return []
+def build_call_graph(all_elements, is_python=True):
+    """Pre-computes the entire call graph (callers and callees for every element)."""
+    lang = 'Python' if is_python else 'Javascript'
+    print(f"Building {lang} call graph for {len(all_elements)} elements...")
+    
+    graph = {el['id']: {'callers': set(), 'callees': set()} for el in all_elements}
+    
+    # We only care about elements that can be called (functions, classes)
+    potential_callees = [el for el in all_elements if el['kind'] in ('function', 'class')]
 
-    for potential_callee in all_js_functions:
-        if potential_callee['id'] == caller_func['id']:
+    for i, caller in enumerate(all_elements):
+        if (i + 1) % 100 == 0:
+            print(f"  Processed {i+1}/{len(all_elements)} {lang} elements...")
+
+        caller_content = caller.get('content', '')
+        if not caller_content:
             continue
-
-        callee_name = potential_callee['name'].split(' (L')[0]
-        if callee_name == '(anonymous)':
-            continue
-
-        # Use regex to find function calls, avoiding variable declarations
-        # This looks for the function name followed by an opening parenthesis
-        pattern = r'\b' + re.escape(callee_name) + r'\s*\('
-        if re.search(pattern, caller_content):
-            callees.append(potential_callee)
             
-    return callees
+        # In Python, statement_blocks can call functions, but we don't trace their callees further
+        if is_python and caller['kind'] == 'statement_block':
+            pass # Allow finding callees, but the trace function will stop there
+
+        for callee in potential_callees:
+            if caller['id'] == callee['id']:
+                continue
+
+            callee_name = callee['name'].split(' (L')[0]
+            if not callee_name or callee_name == '(anonymous)':
+                continue
+
+            pattern = r'\b' + re.escape(callee_name) + r'\b'
+            if re.search(pattern, caller_content):
+                graph[caller['id']]['callees'].add(callee['id'])
+                graph[callee['id']]['callers'].add(caller['id'])
+
+    print(f"{lang} call graph build complete.")
+    return graph
+
+
+def trace_py_element(element_id, all_py_elements_map, py_call_graph, trace_cache):
+    """Recursively traces Python callers and callees using a cache to prevent re-tracing."""
+    element = all_py_elements_map[element_id]
+    if element_id in trace_cache:
+        # If it's a placeholder, we have a recursion.
+        if trace_cache[element_id].get("is_tracing"):
+            return {"id": element['id'], "name": element['name'], "kind": element['kind'], "path": element['path'], "recursive": True}
+        # It's a fully computed node. Return a lightweight reference instead of the full object.
+        return {
+            "id": element['id'],
+            "name": element['name'],
+            "kind": element['kind'],
+            "path": element['path'],
+            "is_reference": True
+        }
+
+    # Put a placeholder in the cache to detect recursion
+    trace_cache[element_id] = {"is_tracing": True}
+    
+    print(f"  [Py] Tracing: {element['kind']} '{element['name']}' in {element['path']}")
+
+    node = {
+        "id": element['id'],
+        "name": element['name'],
+        "kind": element['kind'],
+        "path": element['path'],
+        "callers": [],
+        "callees": []
+    }
+
+    # Find and trace callers
+    for caller_id in sorted(list(py_call_graph[element_id]['callers'])):
+        node['callers'].append(trace_py_element(caller_id, all_py_elements_map, py_call_graph, trace_cache))
+
+    # Find and trace callees, but don't trace further down from a statement block
+    if element['kind'] != 'statement_block':
+        for callee_id in sorted(list(py_call_graph[element_id]['callees'])):
+            node['callees'].append(trace_py_element(callee_id, all_py_elements_map, py_call_graph, trace_cache))
+
+    # Replace the placeholder with the fully traced node
+    trace_cache[element_id] = node
+    return node
+
+def trace_js_element(element_id, all_js_elements_map, js_call_graph, dom_elements_map, trace_cache):
+    """Recursively traces Javascript callers and callees for a given element using a pre-built graph."""
+    element = all_js_elements_map[element_id]
+    if element_id in trace_cache:
+        # If it's a placeholder, we have a recursion.
+        if trace_cache[element_id].get("is_tracing"):
+            return {"id": element['id'], "name": element['name'], "kind": element['kind'], "path": element['path'], "recursive": True}
+        # It's a fully computed node. Return a lightweight reference instead of the full object.
+        return {
+            "id": element['id'],
+            "name": element['name'],
+            "kind": element['kind'],
+            "path": element['path'],
+            "is_reference": True
+        }
+
+    # Put a placeholder in the cache to detect recursion
+    trace_cache[element_id] = {"is_tracing": True}
+    
+    print(f"  [JS] Tracing: {element['kind']} '{element['name']}' in {element['path']}")
+    
+    node = {
+        "id": element['id'],
+        "name": element['name'],
+        "kind": element['kind'],
+        "path": element['path'],
+        "callers": [],
+        "callees": []
+    }
+
+    # Special handling for event listeners
+    if element['kind'] == 'expression statement':
+        content = element.get('content', '')
+        for dom_el_name, dom_el in dom_elements_map.items():
+            if dom_el_name and re.search(r'\b' + re.escape(dom_el_name) + r'\b', content):
+                node['triggered_by_dom_element'] = {
+                    "id": dom_el['id'],
+                    "name": dom_el['name'],
+                    "kind": dom_el['kind'],
+                    "selector": dom_el['metadata'].get('selector', '')
+                }
+                # Stop tracing up from DOM elements, but save the result in the cache
+                trace_cache[element_id] = node
+                return node
+
+    # Find and trace callers
+    for caller_id in sorted(list(js_call_graph[element_id]['callers'])):
+         node['callers'].append(trace_js_element(caller_id, all_js_elements_map, js_call_graph, dom_elements_map, trace_cache))
+
+    # Find and trace callees for functions
+    if element['kind'] == 'function':
+        for callee_id in sorted(list(js_call_graph[element_id]['callees'])):
+            node['callees'].append(trace_js_element(callee_id, all_js_elements_map, js_call_graph, dom_elements_map, trace_cache))
+            
+    # Replace the placeholder with the fully traced node
+    trace_cache[element_id] = node
+    return node
 
 
 def main():
@@ -90,159 +209,93 @@ def main():
                 print(f"Analyzing project ID: {project_id}\n")
 
                 # --- 1. Get all necessary data from both Python and Javascript ---
-                all_py_definitions = get_all_py_definitions(cur, project_id)
-                py_imports = get_imports(cur, project_id)
+                all_py_elements = get_all_py_elements(cur, project_id)
                 all_js_elements = get_all_js_elements(cur, project_id)
-                all_js_functions = [el for el in all_js_elements if el['kind'] == 'function']
+                
+                all_py_elements_map = {el['id']: el for el in all_py_elements}
+                all_js_elements_map = {el['id']: el for el in all_js_elements}
+                
+                py_functions = [el for el in all_py_elements if el['kind'] == 'function']
+                js_functions = [el for el in all_js_elements if el['kind'] == 'function']
+                dom_elements = [el for el in all_js_elements if el['kind'] == 'dom_element_definition']
+                dom_elements_map = {el['name'].split(' (L')[0]: el for el in dom_elements}
 
-                # --- 2. Build the Python call graph (reusing our perfected logic) ---
-                py_elements_map = {el['id']: el for el in all_py_definitions}
-                py_alias_map = build_alias_map(py_imports, all_py_definitions)
-                py_call_graph = build_call_graph(all_py_definitions, py_alias_map)
-                
-                # --- 3. Map out the Python API endpoints ---
-                py_endpoints = get_py_api_endpoints(all_py_definitions)
-                print(f"Found {len(py_endpoints)} Python API endpoints.")
-                # --- DIAGNOSTIC: Show discovered Python endpoints ---
-                if py_endpoints:
-                    print("\n--- Discovered Python Endpoints ---")
-                    for endpoint_key in sorted(py_endpoints.keys()):
-                        print(f"  [✓] {endpoint_key}")
-                    print("------------------------------------")
-                
-                # --- Pre-scan for all JS API calls for diagnostics ---
-                all_js_api_calls = {}
-                for js_func in all_js_functions:
-                    metadata = js_func.get('metadata')
-                    if metadata and metadata.get('api_calls'):
-                        for api_call in metadata.get('api_calls', []):
-                            original_api_key = f"{api_call['method']} {api_call['path']}"
-                            if original_api_key not in all_js_api_calls:
-                                all_js_api_calls[original_api_key] = []
-                            all_js_api_calls[original_api_key].append(f"'{js_func['name']}' in {js_func['path']}")
-                
-                if all_js_api_calls:
-                    print("\n--- Discovered Javascript API Calls ---")
-                    for original_api_key, locations in sorted(all_js_api_calls.items()):
-                        # Check if this JS call matches a Python endpoint by normalizing the path
-                        method, path = original_api_key.split(" ", 1)
-                        normalized_path = re.sub(r'\$\{[^}]+\}', '{VAR}', path)
-                        normalized_key = f"{method} {normalized_path}"
-                        match_status = "[✓]" if normalized_key in py_endpoints else "[✗]"
-                        print(f"  {match_status} {original_api_key}")
-                        for loc in locations:
-                            print(f"      - Called from: {loc}")
-                    print("---------------------------------------\n")
+                # --- NEW: Pre-build call graphs for performance ---
+                py_call_graph = build_call_graph(all_py_elements, is_python=True)
+                js_call_graph = build_call_graph(all_js_elements, is_python=False)
 
-                # --- 4. Find and trace full-stack workflows ---
-                print("--- Tracing Full-Stack Workflows ---")
-                found_workflows = 0
-                for js_func in all_js_functions:
-                    metadata = js_func.get('metadata')
-                    if not (metadata and metadata.get('api_calls')):
-                        continue
+                # --- 2. Map out the Python API endpoints ---
+                py_endpoints = get_py_api_endpoints(py_functions)
+                print(f"\nFound {len(py_endpoints)} Python API endpoints.")
+                if not py_endpoints:
+                    print("No Python API endpoints found. Exiting.")
+                    return
+
+                # --- 3. Find and trace full-stack workflows for each endpoint ---
+                workflows = []
+                print("\n--- Tracing Full-Stack Workflows ---")
+
+                py_trace_cache = {}
+                js_trace_cache = {}
+                for api_key, endpoint_def in py_endpoints.items():
+                    print(f"\nTracing workflow for: {api_key}")
                     
-                    for api_call in metadata.get('api_calls', []):
-                        path = api_call['path']
-                        method = api_call['method']
+                    workflow = {
+                        "workflow_name": api_key,
+                        "endpoint": {
+                            "id": endpoint_def['id'],
+                            "name": endpoint_def['name'],
+                            "kind": endpoint_def['kind'],
+                            "path": endpoint_def['path']
+                        },
+                        "python_trace": None,
+                        "javascript_trace": []
+                    }
+
+                    # a. Trace the Python side
+                    print(" -> Tracing Python backend...")
+                    workflow['python_trace'] = trace_py_element(endpoint_def['id'], all_py_elements_map, py_call_graph, py_trace_cache)
+
+                    # b. Find the corresponding JS call and trace it
+                    print(" -> Tracing Javascript frontend...")
+                    found_js_link = False
+                    for js_func in js_functions:
+                        metadata = js_func.get('metadata')
+                        if not (metadata and metadata.get('api_calls')):
+                            continue
                         
-                        # Normalize JS path parameters to match the Python endpoint keys
-                        normalized_path = re.sub(r'\$\{[^}]+\}', '{VAR}', path)
-                        normalized_api_key = f"{method} {normalized_path}"
-                        
-                        # Check if this JS API call matches a known Python endpoint
-                        if normalized_api_key in py_endpoints:
-                            found_workflows += 1
-                            py_endpoint_def = py_endpoints[normalized_api_key]
+                        for api_call in metadata.get('api_calls', []):
+                            path = api_call['path']
+                            method = api_call['method']
                             
-                            original_api_key = f"{method} {path}"
-                            print(f"\n--- Workflow #{found_workflows}: {original_api_key} ---")
-                            
-                            # a. Trace the JS part upwards from the function making the API call
-                            js_func_name = js_func['name'].split(' (L')[0]
-                            js_func_file = js_func['path']
-                            
-                            elements_in_file = [el for el in all_js_elements if el['path'] == js_func_file]
-                            dom_elements_in_file = [el for el in elements_in_file if el['kind'] == 'dom_element_definition']
-                            
-                            # Find the best possible trigger for the JS function call.
-                            potential_triggers = []
-                            for usage_element in elements_in_file:
-                                if usage_element['id'] == js_func['id']:
-                                    continue
-                                
-                                content = usage_element.get('content', '')
-                                if re.search(r'\b' + re.escape(js_func_name) + r'\b', content):
-                                    # Score potential triggers to find the most likely one.
-                                    # Direct event listeners are the most likely candidates.
-                                    score = 0
-                                    if 'addEventListener' in content:
-                                        score += 2  # Highest score for direct listeners
-                                    if usage_element['kind'] == 'expression statement':
-                                        score += 1
-                                    
-                                    # Find an associated DOM element mentioned in the same code block.
-                                    found_dom_el = None
-                                    for dom_el in dom_elements_in_file:
-                                        if dom_el['name'] and re.search(r'\b' + re.escape(dom_el['name']) + r'\b', content):
-                                            found_dom_el = dom_el
-                                            break
-                                    
-                                    if found_dom_el:
-                                        potential_triggers.append({'score': score, 'usage': usage_element, 'dom': found_dom_el})
+                            normalized_path = re.sub(r'\$\{[^}]+\}', '{VAR}', path)
+                            normalized_api_key = f"{method.upper()} {normalized_path}"
 
-                            if potential_triggers:
-                                # Select the best trigger based on the highest score.
-                                best_trigger = sorted(potential_triggers, key=lambda x: x['score'], reverse=True)[0]
-                                usage_element = best_trigger['usage']
-                                found_dom_el = best_trigger['dom']
-                                content = usage_element.get('content', '')
+                            if normalized_api_key == api_key:
+                                found_js_link = True
+                                print(f"   Found JS entry point: '{js_func['name']}'")
+                                js_trace_root = trace_js_element(js_func['id'], all_js_elements_map, js_call_graph, dom_elements_map, js_trace_cache)
+                                workflow['javascript_trace'].append(js_trace_root)
+                    
+                    if not found_js_link:
+                        print("   No corresponding Javascript API call found for this endpoint.")
 
-                                selector = found_dom_el['metadata'].get('selector', '')
-                                print(f"DOM Element: '{found_dom_el['name']}' (Selector: {selector})")
-                                print(f"  File: {found_dom_el['path']}")
-                                print("   ↓ (Triggers Event)")
-                                
-                                # Describe the trigger more accurately.
-                                trigger_type = "Event Listener" if 'addEventListener' in content else usage_element['kind']
-                                print(f"Trigger: ({trigger_type}) '{usage_element['name']}'")
-                                print(f"  File: {usage_element['path']}")
-                                print("   ↓ (Calls Handler)")
-                            else:
-                                # Fallback if no DOM-related trigger is found.
-                                print("(No specific DOM trigger found)")
-                                print("   ↓ (Calls Handler)")
+                    workflows.append(workflow)
 
-                            # b. Print the JS function itself and its own callees (downwards trace)
-                            print(f"JS Function: '{js_func_name}'")
-                            print(f"  File: {js_func['path']}")
-                            
-                            js_callees = find_js_callees(js_func, all_js_functions)
-                            if js_callees:
-                                print("  JS Call Tree:")
-                                for callee in js_callees:
-                                    callee_name = callee['name'].split(' (L')[0]
-                                    print(f"    -> Calls '{callee_name}' in {callee['path']}")
-                            
-                            print(f"   ↓ (Makes API Call: {original_api_key})")
+                # --- 4. Write output to JSON file ---
+                try:
+                    with open(OUTPUT_FILE_PATH, 'w') as f:
+                        json.dump(workflows, f, indent=2)
+                    
+                    # Verification check
+                    if os.path.exists(OUTPUT_FILE_PATH) and os.path.getsize(OUTPUT_FILE_PATH) > 0:
+                        print(f"\nSuccessfully wrote {len(workflows)} workflows to '{OUTPUT_FILE_PATH}'")
+                    else:
+                        print(f"\nError: Failed to write workflows to '{OUTPUT_FILE_PATH}'. File is missing or empty.", file=sys.stderr)
 
-                            # c. Print the Python endpoint that receives the call
-                            print(f"Python Endpoint: '{py_endpoint_def['name']}'")
-                            print(f"  File: {py_endpoint_def['path']}")
-                            
-                            # d. Print the Python call tree
-                            if py_call_graph.get(py_endpoint_def['id']):
-                                print("  Backend Call Tree:")
-                                for callee_id in py_call_graph[py_endpoint_def['id']]:
-                                    print_call_tree(callee_id, py_call_graph, py_elements_map, 2, {py_endpoint_def['id']})
-                            else:
-                                print("  (Endpoint makes no further calls)")
-                            
-                            print("\n" + "="*50)
+                except IOError as e:
+                    print(f"\nError writing to file '{OUTPUT_FILE_PATH}': {e}", file=sys.stderr)
 
-                if found_workflows == 0:
-                    print("\nNo matching full-stack workflows were found.")
-                    print("Check the diagnostic prints above for potential mismatches in API paths or methods.")
 
     except psycopg2.OperationalError as e:
         print(f"\nDB Error: {e}", file=sys.stderr)

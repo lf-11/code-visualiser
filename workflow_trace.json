@@ -1,0 +1,2324 @@
+[
+  {
+    "workflow_name": "POST /api/projects/parse",
+    "endpoint": {
+      "id": 13662,
+      "name": "parse_project (L19)",
+      "kind": "function",
+      "path": "api/projects.py"
+    },
+    "python_trace": {
+      "id": 13662,
+      "name": "parse_project (L19)",
+      "kind": "function",
+      "path": "api/projects.py",
+      "callers": [],
+      "callees": [
+        {
+          "id": 13578,
+          "name": "Project (L4)",
+          "kind": "class",
+          "path": "models/api_models.py",
+          "callers": [
+            {
+              "id": 13355,
+              "name": "find_workflow (L6)",
+              "kind": "function",
+              "path": "workflow.py",
+              "callers": [
+                {
+                  "id": 13356,
+                  "name": "if __name__ == \"__main__\": (L157)",
+                  "kind": "statement_block",
+                  "path": "workflow.py",
+                  "callers": [],
+                  "callees": []
+                }
+              ],
+              "callees": [
+                {
+                  "id": 13366,
+                  "name": "main (L110)",
+                  "kind": "function",
+                  "path": "api_function_mapper.py",
+                  "callers": [
+                    {
+                      "id": 13355,
+                      "name": "find_workflow (L6)",
+                      "kind": "function",
+                      "path": "workflow.py",
+                      "recursive": true
+                    },
+                    {
+                      "id": 13367,
+                      "name": "if __name__ == \"__main__\": (L157)",
+                      "kind": "statement_block",
+                      "path": "api_function_mapper.py",
+                      "callers": [],
+                      "callees": []
+                    },
+                    {
+                      "id": 13640,
+                      "name": "main (L243)",
+                      "kind": "function",
+                      "path": "db/setup_db.py",
+                      "callers": [
+                        {
+                          "id": 13355,
+                          "name": "find_workflow (L6)",
+                          "kind": "function",
+                          "path": "workflow.py",
+                          "recursive": true
+                        },
+                        {
+                          "id": 13366,
+                          "name": "main (L110)",
+                          "kind": "function",
+                          "path": "api_function_mapper.py",
+                          "recursive": true
+                        },
+                        {
+                          "id": 13367,
+                          "name": "if __name__ == \"__main__\": (L157)",
+                          "kind": "statement_block",
+                          "path": "api_function_mapper.py",
+                          "is_reference": true
+                        },
+                        {
+                          "id": 13641,
+                          "name": "if __name__ == \"__main__\": (L263)",
+                          "kind": "statement_block",
+                          "path": "db/setup_db.py",
+                          "callers": [],
+                          "callees": []
+                        }
+                      ],
+                      "callees": [
+                        {
+                          "id": 13366,
+                          "name": "main (L110)",
+                          "kind": "function",
+                          "path": "api_function_mapper.py",
+                          "recursive": true
+                        },
+                        {
+                          "id": 13636,
+                          "name": "get_db_connection_details (L137)",
+                          "kind": "function",
+                          "path": "db/setup_db.py",
+                          "callers": [
+                            {
+                              "id": 13640,
+                              "name": "main (L243)",
+                              "kind": "function",
+                              "path": "db/setup_db.py",
+                              "recursive": true
+                            }
+                          ],
+                          "callees": []
+                        },
+                        {
+                          "id": 13637,
+                          "name": "create_database (L151)",
+                          "kind": "function",
+                          "path": "db/setup_db.py",
+                          "callers": [
+                            {
+                              "id": 13640,
+                              "name": "main (L243)",
+                              "kind": "function",
+                              "path": "db/setup_db.py",
+                              "recursive": true
+                            }
+                          ],
+                          "callees": []
+                        },
+                        {
+                          "id": 13638,
+                          "name": "create_tables (L183)",
+                          "kind": "function",
+                          "path": "db/setup_db.py",
+                          "callers": [
+                            {
+                              "id": 13640,
+                              "name": "main (L243)",
+                              "kind": "function",
+                              "path": "db/setup_db.py",
+                              "recursive": true
+                            }
+                          ],
+                          "callees": []
+                        },
+                        {
+                          "id": 13639,
+                          "name": "verify_tables (L213)",
+                          "kind": "function",
+                          "path": "db/setup_db.py",
+                          "callers": [
+                            {
+                              "id": 13640,
+                              "name": "main (L243)",
+                              "kind": "function",
+                              "path": "db/setup_db.py",
+                              "recursive": true
+                            }
+                          ],
+                          "callees": []
+                        }
+                      ]
+                    },
+                    {
+                      "id": 13641,
+                      "name": "if __name__ == \"__main__\": (L263)",
+                      "kind": "statement_block",
+                      "path": "db/setup_db.py",
+                      "is_reference": true
+                    }
+                  ],
+                  "callees": [
+                    {
+                      "id": 13362,
+                      "name": "select_project (L7)",
+                      "kind": "function",
+                      "path": "api_function_mapper.py",
+                      "callers": [
+                        {
+                          "id": 13366,
+                          "name": "main (L110)",
+                          "kind": "function",
+                          "path": "api_function_mapper.py",
+                          "recursive": true
+                        }
+                      ],
+                      "callees": []
+                    },
+                    {
+                      "id": 13363,
+                      "name": "get_python_functions (L33)",
+                      "kind": "function",
+                      "path": "api_function_mapper.py",
+                      "callers": [
+                        {
+                          "id": 13366,
+                          "name": "main (L110)",
+                          "kind": "function",
+                          "path": "api_function_mapper.py",
+                          "recursive": true
+                        }
+                      ],
+                      "callees": []
+                    },
+                    {
+                      "id": 13364,
+                      "name": "get_api_endpoints (L57)",
+                      "kind": "function",
+                      "path": "api_function_mapper.py",
+                      "callers": [
+                        {
+                          "id": 13366,
+                          "name": "main (L110)",
+                          "kind": "function",
+                          "path": "api_function_mapper.py",
+                          "recursive": true
+                        }
+                      ],
+                      "callees": []
+                    },
+                    {
+                      "id": 13365,
+                      "name": "map_functions_to_endpoints (L84)",
+                      "kind": "function",
+                      "path": "api_function_mapper.py",
+                      "callers": [
+                        {
+                          "id": 13366,
+                          "name": "main (L110)",
+                          "kind": "function",
+                          "path": "api_function_mapper.py",
+                          "recursive": true
+                        }
+                      ],
+                      "callees": []
+                    },
+                    {
+                      "id": 13583,
+                      "name": "File (L10)",
+                      "kind": "class",
+                      "path": "models/api_models.py",
+                      "callers": [
+                        {
+                          "id": 13355,
+                          "name": "find_workflow (L6)",
+                          "kind": "function",
+                          "path": "workflow.py",
+                          "recursive": true
+                        },
+                        {
+                          "id": 13366,
+                          "name": "main (L110)",
+                          "kind": "function",
+                          "path": "api_function_mapper.py",
+                          "recursive": true
+                        },
+                        {
+                          "id": 13541,
+                          "name": "if __name__ == '__main__': (L227)",
+                          "kind": "statement_block",
+                          "path": "parsers/python_parser.py",
+                          "callers": [],
+                          "callees": []
+                        },
+                        {
+                          "id": 13562,
+                          "name": "if __name__ == '__main__': (L598)",
+                          "kind": "statement_block",
+                          "path": "parsers/js_parser.py",
+                          "callers": [],
+                          "callees": []
+                        },
+                        {
+                          "id": 13575,
+                          "name": "if __name__ == '__main__': (L254)",
+                          "kind": "statement_block",
+                          "path": "parsers/html_parser.py",
+                          "callers": [],
+                          "callees": []
+                        },
+                        {
+                          "id": 13649,
+                          "name": "get_file_details (L12)",
+                          "kind": "function",
+                          "path": "api/files.py",
+                          "callers": [],
+                          "callees": [
+                            {
+                              "id": 13583,
+                              "name": "File (L10)",
+                              "kind": "class",
+                              "path": "models/api_models.py",
+                              "recursive": true
+                            },
+                            {
+                              "id": 13588,
+                              "name": "CodeElement (L16)",
+                              "kind": "class",
+                              "path": "models/api_models.py",
+                              "callers": [
+                                {
+                                  "id": 13596,
+                                  "name": "FileDetails (L25)",
+                                  "kind": "class",
+                                  "path": "models/api_models.py",
+                                  "callers": [
+                                    {
+                                      "id": 13647,
+                                      "name": "from models.api_models import FileDetails, CodeElement (L7)",
+                                      "kind": "import",
+                                      "path": "api/files.py",
+                                      "callers": [],
+                                      "callees": [
+                                        {
+                                          "id": 13588,
+                                          "name": "CodeElement (L16)",
+                                          "kind": "class",
+                                          "path": "models/api_models.py",
+                                          "recursive": true
+                                        },
+                                        {
+                                          "id": 13596,
+                                          "name": "FileDetails (L25)",
+                                          "kind": "class",
+                                          "path": "models/api_models.py",
+                                          "recursive": true
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 13649,
+                                      "name": "get_file_details (L12)",
+                                      "kind": "function",
+                                      "path": "api/files.py",
+                                      "recursive": true
+                                    }
+                                  ],
+                                  "callees": [
+                                    {
+                                      "id": 13588,
+                                      "name": "CodeElement (L16)",
+                                      "kind": "class",
+                                      "path": "models/api_models.py",
+                                      "recursive": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 13598,
+                                  "name": "elements: List[CodeElement] (L27)",
+                                  "kind": "class_variable",
+                                  "path": "models/api_models.py",
+                                  "callers": [],
+                                  "callees": [
+                                    {
+                                      "id": 13588,
+                                      "name": "CodeElement (L16)",
+                                      "kind": "class",
+                                      "path": "models/api_models.py",
+                                      "recursive": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 13647,
+                                  "name": "from models.api_models import FileDetails, CodeElement (L7)",
+                                  "kind": "import",
+                                  "path": "api/files.py",
+                                  "is_reference": true
+                                },
+                                {
+                                  "id": 13649,
+                                  "name": "get_file_details (L12)",
+                                  "kind": "function",
+                                  "path": "api/files.py",
+                                  "recursive": true
+                                }
+                              ],
+                              "callees": []
+                            },
+                            {
+                              "id": 13596,
+                              "name": "FileDetails (L25)",
+                              "kind": "class",
+                              "path": "models/api_models.py",
+                              "is_reference": true
+                            },
+                            {
+                              "id": 13607,
+                              "name": "get_db_connection (L28)",
+                              "kind": "function",
+                              "path": "core/database.py",
+                              "callers": [
+                                {
+                                  "id": 13354,
+                                  "name": "from core.database import get_db_connection (L4)",
+                                  "kind": "import",
+                                  "path": "workflow.py",
+                                  "callers": [],
+                                  "callees": [
+                                    {
+                                      "id": 13607,
+                                      "name": "get_db_connection (L28)",
+                                      "kind": "function",
+                                      "path": "core/database.py",
+                                      "recursive": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 13355,
+                                  "name": "find_workflow (L6)",
+                                  "kind": "function",
+                                  "path": "workflow.py",
+                                  "recursive": true
+                                },
+                                {
+                                  "id": 13361,
+                                  "name": "from core.database import get_db_connection (L5)",
+                                  "kind": "import",
+                                  "path": "api_function_mapper.py",
+                                  "callers": [],
+                                  "callees": [
+                                    {
+                                      "id": 13607,
+                                      "name": "get_db_connection (L28)",
+                                      "kind": "function",
+                                      "path": "core/database.py",
+                                      "recursive": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 13366,
+                                  "name": "main (L110)",
+                                  "kind": "function",
+                                  "path": "api_function_mapper.py",
+                                  "recursive": true
+                                },
+                                {
+                                  "id": 13541,
+                                  "name": "if __name__ == '__main__': (L227)",
+                                  "kind": "statement_block",
+                                  "path": "parsers/python_parser.py",
+                                  "is_reference": true
+                                },
+                                {
+                                  "id": 13619,
+                                  "name": "from core.database import get_db_connection (L12)",
+                                  "kind": "import",
+                                  "path": "core/parser_manager.py",
+                                  "callers": [],
+                                  "callees": [
+                                    {
+                                      "id": 13607,
+                                      "name": "get_db_connection (L28)",
+                                      "kind": "function",
+                                      "path": "core/database.py",
+                                      "recursive": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 13624,
+                                  "name": "parse_and_store_project (L31)",
+                                  "kind": "function",
+                                  "path": "core/parser_manager.py",
+                                  "callers": [
+                                    {
+                                      "id": 13662,
+                                      "name": "parse_project (L19)",
+                                      "kind": "function",
+                                      "path": "api/projects.py",
+                                      "recursive": true
+                                    }
+                                  ],
+                                  "callees": [
+                                    {
+                                      "id": 13578,
+                                      "name": "Project (L4)",
+                                      "kind": "class",
+                                      "path": "models/api_models.py",
+                                      "recursive": true
+                                    },
+                                    {
+                                      "id": 13607,
+                                      "name": "get_db_connection (L28)",
+                                      "kind": "function",
+                                      "path": "core/database.py",
+                                      "recursive": true
+                                    },
+                                    {
+                                      "id": 13622,
+                                      "name": "get_parser_for_file (L22)",
+                                      "kind": "function",
+                                      "path": "core/parser_manager.py",
+                                      "callers": [
+                                        {
+                                          "id": 13624,
+                                          "name": "parse_and_store_project (L31)",
+                                          "kind": "function",
+                                          "path": "core/parser_manager.py",
+                                          "recursive": true
+                                        }
+                                      ],
+                                      "callees": [
+                                        {
+                                          "id": 13543,
+                                          "name": "BaseParser (L3)",
+                                          "kind": "class",
+                                          "path": "parsers/base_parser.py",
+                                          "callers": [
+                                            {
+                                              "id": 13530,
+                                              "name": "try: (L4)",
+                                              "kind": "statement_block",
+                                              "path": "parsers/python_parser.py",
+                                              "callers": [],
+                                              "callees": []
+                                            },
+                                            {
+                                              "id": 13531,
+                                              "name": "PythonParser (L11)",
+                                              "kind": "class",
+                                              "path": "parsers/python_parser.py",
+                                              "callers": [
+                                                {
+                                                  "id": 13541,
+                                                  "name": "if __name__ == '__main__': (L227)",
+                                                  "kind": "statement_block",
+                                                  "path": "parsers/python_parser.py",
+                                                  "is_reference": true
+                                                },
+                                                {
+                                                  "id": 13616,
+                                                  "name": "from parsers.python_parser import PythonParser (L9)",
+                                                  "kind": "import",
+                                                  "path": "core/parser_manager.py",
+                                                  "callers": [],
+                                                  "callees": [
+                                                    {
+                                                      "id": 13531,
+                                                      "name": "PythonParser (L11)",
+                                                      "kind": "class",
+                                                      "path": "parsers/python_parser.py",
+                                                      "recursive": true
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "id": 13621,
+                                                  "name": "PARSER_MAPPING: Dict[str, Type[BaseParser]] = { (L15)",
+                                                  "kind": "variable_definition",
+                                                  "path": "core/parser_manager.py",
+                                                  "callers": [],
+                                                  "callees": [
+                                                    {
+                                                      "id": 13531,
+                                                      "name": "PythonParser (L11)",
+                                                      "kind": "class",
+                                                      "path": "parsers/python_parser.py",
+                                                      "recursive": true
+                                                    },
+                                                    {
+                                                      "id": 13543,
+                                                      "name": "BaseParser (L3)",
+                                                      "kind": "class",
+                                                      "path": "parsers/base_parser.py",
+                                                      "recursive": true
+                                                    },
+                                                    {
+                                                      "id": 13551,
+                                                      "name": "JavascriptParser (L124)",
+                                                      "kind": "class",
+                                                      "path": "parsers/js_parser.py",
+                                                      "callers": [
+                                                        {
+                                                          "id": 13550,
+                                                          "name": "if Parser: (L26)",
+                                                          "kind": "statement_block",
+                                                          "path": "parsers/js_parser.py",
+                                                          "callers": [],
+                                                          "callees": []
+                                                        },
+                                                        {
+                                                          "id": 13562,
+                                                          "name": "if __name__ == '__main__': (L598)",
+                                                          "kind": "statement_block",
+                                                          "path": "parsers/js_parser.py",
+                                                          "is_reference": true
+                                                        },
+                                                        {
+                                                          "id": 13617,
+                                                          "name": "from parsers.js_parser import JavascriptParser (L10)",
+                                                          "kind": "import",
+                                                          "path": "core/parser_manager.py",
+                                                          "callers": [],
+                                                          "callees": [
+                                                            {
+                                                              "id": 13551,
+                                                              "name": "JavascriptParser (L124)",
+                                                              "kind": "class",
+                                                              "path": "parsers/js_parser.py",
+                                                              "recursive": true
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "id": 13621,
+                                                          "name": "PARSER_MAPPING: Dict[str, Type[BaseParser]] = { (L15)",
+                                                          "kind": "variable_definition",
+                                                          "path": "core/parser_manager.py",
+                                                          "recursive": true
+                                                        }
+                                                      ],
+                                                      "callees": [
+                                                        {
+                                                          "id": 13543,
+                                                          "name": "BaseParser (L3)",
+                                                          "kind": "class",
+                                                          "path": "parsers/base_parser.py",
+                                                          "recursive": true
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "id": 13569,
+                                                      "name": "HTMLParser (L31)",
+                                                      "kind": "class",
+                                                      "path": "parsers/html_parser.py",
+                                                      "callers": [
+                                                        {
+                                                          "id": 13575,
+                                                          "name": "if __name__ == '__main__': (L254)",
+                                                          "kind": "statement_block",
+                                                          "path": "parsers/html_parser.py",
+                                                          "is_reference": true
+                                                        },
+                                                        {
+                                                          "id": 13618,
+                                                          "name": "from parsers.html_parser import HTMLParser (L11)",
+                                                          "kind": "import",
+                                                          "path": "core/parser_manager.py",
+                                                          "callers": [],
+                                                          "callees": [
+                                                            {
+                                                              "id": 13569,
+                                                              "name": "HTMLParser (L31)",
+                                                              "kind": "class",
+                                                              "path": "parsers/html_parser.py",
+                                                              "recursive": true
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "id": 13621,
+                                                          "name": "PARSER_MAPPING: Dict[str, Type[BaseParser]] = { (L15)",
+                                                          "kind": "variable_definition",
+                                                          "path": "core/parser_manager.py",
+                                                          "recursive": true
+                                                        }
+                                                      ],
+                                                      "callees": [
+                                                        {
+                                                          "id": 13543,
+                                                          "name": "BaseParser (L3)",
+                                                          "kind": "class",
+                                                          "path": "parsers/base_parser.py",
+                                                          "recursive": true
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "callees": [
+                                                {
+                                                  "id": 13543,
+                                                  "name": "BaseParser (L3)",
+                                                  "kind": "class",
+                                                  "path": "parsers/base_parser.py",
+                                                  "recursive": true
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "id": 13547,
+                                              "name": "try: (L9)",
+                                              "kind": "statement_block",
+                                              "path": "parsers/js_parser.py",
+                                              "callers": [],
+                                              "callees": []
+                                            },
+                                            {
+                                              "id": 13551,
+                                              "name": "JavascriptParser (L124)",
+                                              "kind": "class",
+                                              "path": "parsers/js_parser.py",
+                                              "is_reference": true
+                                            },
+                                            {
+                                              "id": 13565,
+                                              "name": "try: (L6)",
+                                              "kind": "statement_block",
+                                              "path": "parsers/html_parser.py",
+                                              "callers": [],
+                                              "callees": []
+                                            },
+                                            {
+                                              "id": 13569,
+                                              "name": "HTMLParser (L31)",
+                                              "kind": "class",
+                                              "path": "parsers/html_parser.py",
+                                              "is_reference": true
+                                            },
+                                            {
+                                              "id": 13615,
+                                              "name": "from parsers.base_parser import BaseParser (L8)",
+                                              "kind": "import",
+                                              "path": "core/parser_manager.py",
+                                              "callers": [],
+                                              "callees": [
+                                                {
+                                                  "id": 13543,
+                                                  "name": "BaseParser (L3)",
+                                                  "kind": "class",
+                                                  "path": "parsers/base_parser.py",
+                                                  "recursive": true
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "id": 13621,
+                                              "name": "PARSER_MAPPING: Dict[str, Type[BaseParser]] = { (L15)",
+                                              "kind": "variable_definition",
+                                              "path": "core/parser_manager.py",
+                                              "is_reference": true
+                                            },
+                                            {
+                                              "id": 13622,
+                                              "name": "get_parser_for_file (L22)",
+                                              "kind": "function",
+                                              "path": "core/parser_manager.py",
+                                              "recursive": true
+                                            }
+                                          ],
+                                          "callees": []
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "id": 13623,
+                                      "name": "calculate_checksum (L27)",
+                                      "kind": "function",
+                                      "path": "core/parser_manager.py",
+                                      "callers": [
+                                        {
+                                          "id": 13624,
+                                          "name": "parse_and_store_project (L31)",
+                                          "kind": "function",
+                                          "path": "core/parser_manager.py",
+                                          "recursive": true
+                                        }
+                                      ],
+                                      "callees": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 13646,
+                                  "name": "from core.database import get_db_connection (L6)",
+                                  "kind": "import",
+                                  "path": "api/files.py",
+                                  "callers": [],
+                                  "callees": [
+                                    {
+                                      "id": 13607,
+                                      "name": "get_db_connection (L28)",
+                                      "kind": "function",
+                                      "path": "core/database.py",
+                                      "recursive": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 13649,
+                                  "name": "get_file_details (L12)",
+                                  "kind": "function",
+                                  "path": "api/files.py",
+                                  "recursive": true
+                                },
+                                {
+                                  "id": 13655,
+                                  "name": "from core.database import get_db_connection (L7)",
+                                  "kind": "import",
+                                  "path": "api/projects.py",
+                                  "callers": [],
+                                  "callees": [
+                                    {
+                                      "id": 13607,
+                                      "name": "get_db_connection (L28)",
+                                      "kind": "function",
+                                      "path": "core/database.py",
+                                      "recursive": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 13663,
+                                  "name": "get_project_parsing_status (L44)",
+                                  "kind": "function",
+                                  "path": "api/projects.py",
+                                  "callers": [],
+                                  "callees": [
+                                    {
+                                      "id": 13578,
+                                      "name": "Project (L4)",
+                                      "kind": "class",
+                                      "path": "models/api_models.py",
+                                      "recursive": true
+                                    },
+                                    {
+                                      "id": 13583,
+                                      "name": "File (L10)",
+                                      "kind": "class",
+                                      "path": "models/api_models.py",
+                                      "recursive": true
+                                    },
+                                    {
+                                      "id": 13607,
+                                      "name": "get_db_connection (L28)",
+                                      "kind": "function",
+                                      "path": "core/database.py",
+                                      "recursive": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 13664,
+                                  "name": "list_files_for_project (L105)",
+                                  "kind": "function",
+                                  "path": "api/projects.py",
+                                  "callers": [],
+                                  "callees": [
+                                    {
+                                      "id": 13578,
+                                      "name": "Project (L4)",
+                                      "kind": "class",
+                                      "path": "models/api_models.py",
+                                      "recursive": true
+                                    },
+                                    {
+                                      "id": 13583,
+                                      "name": "File (L10)",
+                                      "kind": "class",
+                                      "path": "models/api_models.py",
+                                      "recursive": true
+                                    },
+                                    {
+                                      "id": 13607,
+                                      "name": "get_db_connection (L28)",
+                                      "kind": "function",
+                                      "path": "core/database.py",
+                                      "recursive": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": 13665,
+                                  "name": "list_projects (L128)",
+                                  "kind": "function",
+                                  "path": "api/projects.py",
+                                  "callers": [],
+                                  "callees": [
+                                    {
+                                      "id": 13578,
+                                      "name": "Project (L4)",
+                                      "kind": "class",
+                                      "path": "models/api_models.py",
+                                      "recursive": true
+                                    },
+                                    {
+                                      "id": 13607,
+                                      "name": "get_db_connection (L28)",
+                                      "kind": "function",
+                                      "path": "core/database.py",
+                                      "recursive": true
+                                    }
+                                  ]
+                                }
+                              ],
+                              "callees": [
+                                {
+                                  "id": 13606,
+                                  "name": "get_pool (L10)",
+                                  "kind": "function",
+                                  "path": "core/database.py",
+                                  "callers": [
+                                    {
+                                      "id": 13607,
+                                      "name": "get_db_connection (L28)",
+                                      "kind": "function",
+                                      "path": "core/database.py",
+                                      "recursive": true
+                                    }
+                                  ],
+                                  "callees": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": 13656,
+                          "name": "from models.api_models import Project, File (L8)",
+                          "kind": "import",
+                          "path": "api/projects.py",
+                          "callers": [],
+                          "callees": [
+                            {
+                              "id": 13578,
+                              "name": "Project (L4)",
+                              "kind": "class",
+                              "path": "models/api_models.py",
+                              "recursive": true
+                            },
+                            {
+                              "id": 13583,
+                              "name": "File (L10)",
+                              "kind": "class",
+                              "path": "models/api_models.py",
+                              "recursive": true
+                            }
+                          ]
+                        },
+                        {
+                          "id": 13663,
+                          "name": "get_project_parsing_status (L44)",
+                          "kind": "function",
+                          "path": "api/projects.py",
+                          "is_reference": true
+                        },
+                        {
+                          "id": 13664,
+                          "name": "list_files_for_project (L105)",
+                          "kind": "function",
+                          "path": "api/projects.py",
+                          "is_reference": true
+                        }
+                      ],
+                      "callees": []
+                    },
+                    {
+                      "id": 13607,
+                      "name": "get_db_connection (L28)",
+                      "kind": "function",
+                      "path": "core/database.py",
+                      "is_reference": true
+                    },
+                    {
+                      "id": 13640,
+                      "name": "main (L243)",
+                      "kind": "function",
+                      "path": "db/setup_db.py",
+                      "is_reference": true
+                    }
+                  ]
+                },
+                {
+                  "id": 13578,
+                  "name": "Project (L4)",
+                  "kind": "class",
+                  "path": "models/api_models.py",
+                  "recursive": true
+                },
+                {
+                  "id": 13583,
+                  "name": "File (L10)",
+                  "kind": "class",
+                  "path": "models/api_models.py",
+                  "is_reference": true
+                },
+                {
+                  "id": 13607,
+                  "name": "get_db_connection (L28)",
+                  "kind": "function",
+                  "path": "core/database.py",
+                  "is_reference": true
+                },
+                {
+                  "id": 13640,
+                  "name": "main (L243)",
+                  "kind": "function",
+                  "path": "db/setup_db.py",
+                  "is_reference": true
+                }
+              ]
+            },
+            {
+              "id": 13624,
+              "name": "parse_and_store_project (L31)",
+              "kind": "function",
+              "path": "core/parser_manager.py",
+              "is_reference": true
+            },
+            {
+              "id": 13656,
+              "name": "from models.api_models import Project, File (L8)",
+              "kind": "import",
+              "path": "api/projects.py",
+              "is_reference": true
+            },
+            {
+              "id": 13662,
+              "name": "parse_project (L19)",
+              "kind": "function",
+              "path": "api/projects.py",
+              "recursive": true
+            },
+            {
+              "id": 13663,
+              "name": "get_project_parsing_status (L44)",
+              "kind": "function",
+              "path": "api/projects.py",
+              "is_reference": true
+            },
+            {
+              "id": 13664,
+              "name": "list_files_for_project (L105)",
+              "kind": "function",
+              "path": "api/projects.py",
+              "is_reference": true
+            },
+            {
+              "id": 13665,
+              "name": "list_projects (L128)",
+              "kind": "function",
+              "path": "api/projects.py",
+              "is_reference": true
+            }
+          ],
+          "callees": []
+        },
+        {
+          "id": 13624,
+          "name": "parse_and_store_project (L31)",
+          "kind": "function",
+          "path": "core/parser_manager.py",
+          "is_reference": true
+        }
+      ]
+    },
+    "javascript_trace": [
+      {
+        "id": 13454,
+        "name": "parseProject",
+        "kind": "function",
+        "path": "static/app.js",
+        "callers": [
+          {
+            "id": 13467,
+            "name": "elements.parseBtn.addEventListener('click', parseProject);",
+            "kind": "expression statement",
+            "path": "static/app.js",
+            "callers": [],
+            "callees": [],
+            "triggered_by_dom_element": {
+              "id": 13430,
+              "name": "parseBtn",
+              "kind": "dom_element_definition",
+              "selector": "parse-project-btn"
+            }
+          }
+        ],
+        "callees": [
+          {
+            "id": 13444,
+            "name": "setStatus",
+            "kind": "function",
+            "path": "static/app.js",
+            "callers": [
+              {
+                "id": 13445,
+                "name": "fetchProjects",
+                "kind": "function",
+                "path": "static/app.js",
+                "callers": [
+                  {
+                    "id": 13454,
+                    "name": "parseProject",
+                    "kind": "function",
+                    "path": "static/app.js",
+                    "recursive": true
+                  },
+                  {
+                    "id": 13474,
+                    "name": "fetchProjects();",
+                    "kind": "expression statement",
+                    "path": "static/app.js",
+                    "callers": [],
+                    "callees": []
+                  }
+                ],
+                "callees": [
+                  {
+                    "id": 13444,
+                    "name": "setStatus",
+                    "kind": "function",
+                    "path": "static/app.js",
+                    "recursive": true
+                  },
+                  {
+                    "id": 13447,
+                    "name": "handleProjectSelection",
+                    "kind": "function",
+                    "path": "static/app.js",
+                    "callers": [
+                      {
+                        "id": 13445,
+                        "name": "fetchProjects",
+                        "kind": "function",
+                        "path": "static/app.js",
+                        "recursive": true
+                      },
+                      {
+                        "id": 13462,
+                        "name": "elements.projectSelect.addEventListener('change', handleProjectSelection);",
+                        "kind": "expression statement",
+                        "path": "static/app.js",
+                        "callers": [],
+                        "callees": [],
+                        "triggered_by_dom_element": {
+                          "id": 13426,
+                          "name": "projectSelect",
+                          "kind": "dom_element_definition",
+                          "selector": "project-select"
+                        }
+                      }
+                    ],
+                    "callees": [
+                      {
+                        "id": 13448,
+                        "name": "checkProjectParsingStatus",
+                        "kind": "function",
+                        "path": "static/app.js",
+                        "callers": [
+                          {
+                            "id": 13447,
+                            "name": "handleProjectSelection",
+                            "kind": "function",
+                            "path": "static/app.js",
+                            "recursive": true
+                          }
+                        ],
+                        "callees": [
+                          {
+                            "id": 13453,
+                            "name": "handleFileSelection",
+                            "kind": "function",
+                            "path": "static/app.js",
+                            "callers": [
+                              {
+                                "id": 13448,
+                                "name": "checkProjectParsingStatus",
+                                "kind": "function",
+                                "path": "static/app.js",
+                                "recursive": true
+                              },
+                              {
+                                "id": 13449,
+                                "name": "(anonymous) (L120:38)",
+                                "kind": "function",
+                                "path": "static/app.js",
+                                "callers": [],
+                                "callees": [
+                                  {
+                                    "id": 13453,
+                                    "name": "handleFileSelection",
+                                    "kind": "function",
+                                    "path": "static/app.js",
+                                    "recursive": true
+                                  }
+                                ]
+                              },
+                              {
+                                "id": 13450,
+                                "name": "(anonymous) (L125:49)",
+                                "kind": "function",
+                                "path": "static/app.js",
+                                "callers": [],
+                                "callees": [
+                                  {
+                                    "id": 13453,
+                                    "name": "handleFileSelection",
+                                    "kind": "function",
+                                    "path": "static/app.js",
+                                    "recursive": true
+                                  }
+                                ]
+                              },
+                              {
+                                "id": 13451,
+                                "name": "fetchFilesForProject",
+                                "kind": "function",
+                                "path": "static/app.js",
+                                "callers": [
+                                  {
+                                    "id": 13447,
+                                    "name": "handleProjectSelection",
+                                    "kind": "function",
+                                    "path": "static/app.js",
+                                    "recursive": true
+                                  }
+                                ],
+                                "callees": [
+                                  {
+                                    "id": 13444,
+                                    "name": "setStatus",
+                                    "kind": "function",
+                                    "path": "static/app.js",
+                                    "recursive": true
+                                  },
+                                  {
+                                    "id": 13453,
+                                    "name": "handleFileSelection",
+                                    "kind": "function",
+                                    "path": "static/app.js",
+                                    "recursive": true
+                                  }
+                                ]
+                              },
+                              {
+                                "id": 13455,
+                                "name": "navigateTo",
+                                "kind": "function",
+                                "path": "static/app.js",
+                                "callers": [
+                                  {
+                                    "id": 13464,
+                                    "name": "(anonymous) (L322:51)",
+                                    "kind": "function",
+                                    "path": "static/app.js",
+                                    "callers": [],
+                                    "callees": [
+                                      {
+                                        "id": 13455,
+                                        "name": "navigateTo",
+                                        "kind": "function",
+                                        "path": "static/app.js",
+                                        "recursive": true
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "id": 13465,
+                                    "name": "(anonymous) (L323:51)",
+                                    "kind": "function",
+                                    "path": "static/app.js",
+                                    "callers": [],
+                                    "callees": [
+                                      {
+                                        "id": 13455,
+                                        "name": "navigateTo",
+                                        "kind": "function",
+                                        "path": "static/app.js",
+                                        "recursive": true
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "callees": [
+                                  {
+                                    "id": 13453,
+                                    "name": "handleFileSelection",
+                                    "kind": "function",
+                                    "path": "static/app.js",
+                                    "recursive": true
+                                  }
+                                ]
+                              },
+                              {
+                                "id": 13456,
+                                "name": "jumpToNextIssue",
+                                "kind": "function",
+                                "path": "static/app.js",
+                                "callers": [
+                                  {
+                                    "id": 13466,
+                                    "name": "elements.jumpToIssueBtn.addEventListener('click', jumpToNextIssue);",
+                                    "kind": "expression statement",
+                                    "path": "static/app.js",
+                                    "callers": [],
+                                    "callees": [],
+                                    "triggered_by_dom_element": {
+                                      "id": 13434,
+                                      "name": "jumpToIssueBtn",
+                                      "kind": "dom_element_definition",
+                                      "selector": "jump-to-issue-btn"
+                                    }
+                                  }
+                                ],
+                                "callees": [
+                                  {
+                                    "id": 13453,
+                                    "name": "handleFileSelection",
+                                    "kind": "function",
+                                    "path": "static/app.js",
+                                    "recursive": true
+                                  }
+                                ]
+                              },
+                              {
+                                "id": 13463,
+                                "name": "elements.fileSelect.addEventListener('change', handleFileSelection);",
+                                "kind": "expression statement",
+                                "path": "static/app.js",
+                                "callers": [],
+                                "callees": [],
+                                "triggered_by_dom_element": {
+                                  "id": 13427,
+                                  "name": "fileSelect",
+                                  "kind": "dom_element_definition",
+                                  "selector": "file-select"
+                                }
+                              }
+                            ],
+                            "callees": [
+                              {
+                                "id": 13444,
+                                "name": "setStatus",
+                                "kind": "function",
+                                "path": "static/app.js",
+                                "recursive": true
+                              },
+                              {
+                                "id": 13460,
+                                "name": "updateAllViews",
+                                "kind": "function",
+                                "path": "static/app.js",
+                                "callers": [
+                                  {
+                                    "id": 13447,
+                                    "name": "handleProjectSelection",
+                                    "kind": "function",
+                                    "path": "static/app.js",
+                                    "recursive": true
+                                  },
+                                  {
+                                    "id": 13453,
+                                    "name": "handleFileSelection",
+                                    "kind": "function",
+                                    "path": "static/app.js",
+                                    "recursive": true
+                                  },
+                                  {
+                                    "id": 13457,
+                                    "name": "handleTabClick",
+                                    "kind": "function",
+                                    "path": "static/app.js",
+                                    "callers": [
+                                      {
+                                        "id": 13470,
+                                        "name": "(anonymous) (L332:26)",
+                                        "kind": "function",
+                                        "path": "static/app.js",
+                                        "callers": [],
+                                        "callees": [
+                                          {
+                                            "id": 13457,
+                                            "name": "handleTabClick",
+                                            "kind": "function",
+                                            "path": "static/app.js",
+                                            "recursive": true
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "callees": [
+                                      {
+                                        "id": 13460,
+                                        "name": "updateAllViews",
+                                        "kind": "function",
+                                        "path": "static/app.js",
+                                        "recursive": true
+                                      },
+                                      {
+                                        "id": 13481,
+                                        "name": "render",
+                                        "kind": "function",
+                                        "path": "static/file-overview.js",
+                                        "callers": [
+                                          {
+                                            "id": 13457,
+                                            "name": "handleTabClick",
+                                            "kind": "function",
+                                            "path": "static/app.js",
+                                            "recursive": true
+                                          },
+                                          {
+                                            "id": 13460,
+                                            "name": "updateAllViews",
+                                            "kind": "function",
+                                            "path": "static/app.js",
+                                            "recursive": true
+                                          },
+                                          {
+                                            "id": 13476,
+                                            "name": "(anonymous) (L1:22)",
+                                            "kind": "function",
+                                            "path": "static/file-overview.js",
+                                            "callers": [],
+                                            "callees": [
+                                              {
+                                                "id": 13477,
+                                                "name": "init",
+                                                "kind": "function",
+                                                "path": "static/file-overview.js",
+                                                "callers": [
+                                                  {
+                                                    "id": 13472,
+                                                    "name": "FileInspector.init();",
+                                                    "kind": "expression statement",
+                                                    "path": "static/app.js",
+                                                    "callers": [],
+                                                    "callees": []
+                                                  },
+                                                  {
+                                                    "id": 13473,
+                                                    "name": "FileOverview.init();",
+                                                    "kind": "expression statement",
+                                                    "path": "static/app.js",
+                                                    "callers": [],
+                                                    "callees": []
+                                                  },
+                                                  {
+                                                    "id": 13476,
+                                                    "name": "(anonymous) (L1:22)",
+                                                    "kind": "function",
+                                                    "path": "static/file-overview.js",
+                                                    "recursive": true
+                                                  },
+                                                  {
+                                                    "id": 13508,
+                                                    "name": "(anonymous) (L1:23)",
+                                                    "kind": "function",
+                                                    "path": "static/file-inspector.js",
+                                                    "callers": [],
+                                                    "callees": [
+                                                      {
+                                                        "id": 13477,
+                                                        "name": "init",
+                                                        "kind": "function",
+                                                        "path": "static/file-overview.js",
+                                                        "recursive": true
+                                                      },
+                                                      {
+                                                        "id": 13481,
+                                                        "name": "render",
+                                                        "kind": "function",
+                                                        "path": "static/file-overview.js",
+                                                        "recursive": true
+                                                      },
+                                                      {
+                                                        "id": 13509,
+                                                        "name": "cacheDomElements",
+                                                        "kind": "function",
+                                                        "path": "static/file-inspector.js",
+                                                        "callers": [
+                                                          {
+                                                            "id": 13508,
+                                                            "name": "(anonymous) (L1:23)",
+                                                            "kind": "function",
+                                                            "path": "static/file-inspector.js",
+                                                            "recursive": true
+                                                          },
+                                                          {
+                                                            "id": 13526,
+                                                            "name": "init",
+                                                            "kind": "function",
+                                                            "path": "static/file-inspector.js",
+                                                            "callers": [
+                                                              {
+                                                                "id": 13472,
+                                                                "name": "FileInspector.init();",
+                                                                "kind": "expression statement",
+                                                                "path": "static/app.js",
+                                                                "is_reference": true
+                                                              },
+                                                              {
+                                                                "id": 13473,
+                                                                "name": "FileOverview.init();",
+                                                                "kind": "expression statement",
+                                                                "path": "static/app.js",
+                                                                "is_reference": true
+                                                              },
+                                                              {
+                                                                "id": 13476,
+                                                                "name": "(anonymous) (L1:22)",
+                                                                "kind": "function",
+                                                                "path": "static/file-overview.js",
+                                                                "recursive": true
+                                                              },
+                                                              {
+                                                                "id": 13477,
+                                                                "name": "init",
+                                                                "kind": "function",
+                                                                "path": "static/file-overview.js",
+                                                                "recursive": true
+                                                              },
+                                                              {
+                                                                "id": 13508,
+                                                                "name": "(anonymous) (L1:23)",
+                                                                "kind": "function",
+                                                                "path": "static/file-inspector.js",
+                                                                "recursive": true
+                                                              }
+                                                            ],
+                                                            "callees": [
+                                                              {
+                                                                "id": 13477,
+                                                                "name": "init",
+                                                                "kind": "function",
+                                                                "path": "static/file-overview.js",
+                                                                "recursive": true
+                                                              },
+                                                              {
+                                                                "id": 13509,
+                                                                "name": "cacheDomElements",
+                                                                "kind": "function",
+                                                                "path": "static/file-inspector.js",
+                                                                "recursive": true
+                                                              },
+                                                              {
+                                                                "id": 13511,
+                                                                "name": "updateVisibleElements",
+                                                                "kind": "function",
+                                                                "path": "static/file-inspector.js",
+                                                                "callers": [
+                                                                  {
+                                                                    "id": 13508,
+                                                                    "name": "(anonymous) (L1:23)",
+                                                                    "kind": "function",
+                                                                    "path": "static/file-inspector.js",
+                                                                    "recursive": true
+                                                                  },
+                                                                  {
+                                                                    "id": 13523,
+                                                                    "name": "render",
+                                                                    "kind": "function",
+                                                                    "path": "static/file-inspector.js",
+                                                                    "callers": [
+                                                                      {
+                                                                        "id": 13457,
+                                                                        "name": "handleTabClick",
+                                                                        "kind": "function",
+                                                                        "path": "static/app.js",
+                                                                        "recursive": true
+                                                                      },
+                                                                      {
+                                                                        "id": 13460,
+                                                                        "name": "updateAllViews",
+                                                                        "kind": "function",
+                                                                        "path": "static/app.js",
+                                                                        "recursive": true
+                                                                      },
+                                                                      {
+                                                                        "id": 13476,
+                                                                        "name": "(anonymous) (L1:22)",
+                                                                        "kind": "function",
+                                                                        "path": "static/file-overview.js",
+                                                                        "recursive": true
+                                                                      },
+                                                                      {
+                                                                        "id": 13480,
+                                                                        "name": "switchLayout",
+                                                                        "kind": "function",
+                                                                        "path": "static/file-overview.js",
+                                                                        "callers": [
+                                                                          {
+                                                                            "id": 13476,
+                                                                            "name": "(anonymous) (L1:22)",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-overview.js",
+                                                                            "recursive": true
+                                                                          },
+                                                                          {
+                                                                            "id": 13477,
+                                                                            "name": "init",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-overview.js",
+                                                                            "recursive": true
+                                                                          },
+                                                                          {
+                                                                            "id": 13478,
+                                                                            "name": "(anonymous) (L24:74)",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-overview.js",
+                                                                            "callers": [],
+                                                                            "callees": [
+                                                                              {
+                                                                                "id": 13480,
+                                                                                "name": "switchLayout",
+                                                                                "kind": "function",
+                                                                                "path": "static/file-overview.js",
+                                                                                "recursive": true
+                                                                              }
+                                                                            ]
+                                                                          },
+                                                                          {
+                                                                            "id": 13479,
+                                                                            "name": "(anonymous) (L25:78)",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-overview.js",
+                                                                            "callers": [],
+                                                                            "callees": [
+                                                                              {
+                                                                                "id": 13480,
+                                                                                "name": "switchLayout",
+                                                                                "kind": "function",
+                                                                                "path": "static/file-overview.js",
+                                                                                "recursive": true
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        ],
+                                                                        "callees": [
+                                                                          {
+                                                                            "id": 13481,
+                                                                            "name": "render",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-overview.js",
+                                                                            "recursive": true
+                                                                          },
+                                                                          {
+                                                                            "id": 13523,
+                                                                            "name": "render",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-inspector.js",
+                                                                            "recursive": true
+                                                                          }
+                                                                        ]
+                                                                      },
+                                                                      {
+                                                                        "id": 13481,
+                                                                        "name": "render",
+                                                                        "kind": "function",
+                                                                        "path": "static/file-overview.js",
+                                                                        "recursive": true
+                                                                      },
+                                                                      {
+                                                                        "id": 13508,
+                                                                        "name": "(anonymous) (L1:23)",
+                                                                        "kind": "function",
+                                                                        "path": "static/file-inspector.js",
+                                                                        "recursive": true
+                                                                      }
+                                                                    ],
+                                                                    "callees": [
+                                                                      {
+                                                                        "id": 13481,
+                                                                        "name": "render",
+                                                                        "kind": "function",
+                                                                        "path": "static/file-overview.js",
+                                                                        "recursive": true
+                                                                      },
+                                                                      {
+                                                                        "id": 13510,
+                                                                        "name": "escapeHtml",
+                                                                        "kind": "function",
+                                                                        "path": "static/file-inspector.js",
+                                                                        "callers": [
+                                                                          {
+                                                                            "id": 13508,
+                                                                            "name": "(anonymous) (L1:23)",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-inspector.js",
+                                                                            "recursive": true
+                                                                          },
+                                                                          {
+                                                                            "id": 13520,
+                                                                            "name": "layoutTree",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-inspector.js",
+                                                                            "callers": [
+                                                                              {
+                                                                                "id": 13508,
+                                                                                "name": "(anonymous) (L1:23)",
+                                                                                "kind": "function",
+                                                                                "path": "static/file-inspector.js",
+                                                                                "recursive": true
+                                                                              },
+                                                                              {
+                                                                                "id": 13522,
+                                                                                "name": "(anonymous) (L98:22)",
+                                                                                "kind": "function",
+                                                                                "path": "static/file-inspector.js",
+                                                                                "callers": [],
+                                                                                "callees": [
+                                                                                  {
+                                                                                    "id": 13510,
+                                                                                    "name": "escapeHtml",
+                                                                                    "kind": "function",
+                                                                                    "path": "static/file-inspector.js",
+                                                                                    "recursive": true
+                                                                                  },
+                                                                                  {
+                                                                                    "id": 13520,
+                                                                                    "name": "layoutTree",
+                                                                                    "kind": "function",
+                                                                                    "path": "static/file-inspector.js",
+                                                                                    "recursive": true
+                                                                                  }
+                                                                                ]
+                                                                              },
+                                                                              {
+                                                                                "id": 13523,
+                                                                                "name": "render",
+                                                                                "kind": "function",
+                                                                                "path": "static/file-inspector.js",
+                                                                                "recursive": true
+                                                                              }
+                                                                            ],
+                                                                            "callees": [
+                                                                              {
+                                                                                "id": 13510,
+                                                                                "name": "escapeHtml",
+                                                                                "kind": "function",
+                                                                                "path": "static/file-inspector.js",
+                                                                                "recursive": true
+                                                                              }
+                                                                            ]
+                                                                          },
+                                                                          {
+                                                                            "id": 13522,
+                                                                            "name": "(anonymous) (L98:22)",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-inspector.js",
+                                                                            "is_reference": true
+                                                                          },
+                                                                          {
+                                                                            "id": 13523,
+                                                                            "name": "render",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-inspector.js",
+                                                                            "recursive": true
+                                                                          },
+                                                                          {
+                                                                            "id": 13524,
+                                                                            "name": "(anonymous) (L177:35)",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-inspector.js",
+                                                                            "callers": [],
+                                                                            "callees": [
+                                                                              {
+                                                                                "id": 13510,
+                                                                                "name": "escapeHtml",
+                                                                                "kind": "function",
+                                                                                "path": "static/file-inspector.js",
+                                                                                "recursive": true
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        ],
+                                                                        "callees": []
+                                                                      },
+                                                                      {
+                                                                        "id": 13511,
+                                                                        "name": "updateVisibleElements",
+                                                                        "kind": "function",
+                                                                        "path": "static/file-inspector.js",
+                                                                        "recursive": true
+                                                                      },
+                                                                      {
+                                                                        "id": 13513,
+                                                                        "name": "buildElementTree",
+                                                                        "kind": "function",
+                                                                        "path": "static/file-inspector.js",
+                                                                        "callers": [
+                                                                          {
+                                                                            "id": 13508,
+                                                                            "name": "(anonymous) (L1:23)",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-inspector.js",
+                                                                            "recursive": true
+                                                                          },
+                                                                          {
+                                                                            "id": 13523,
+                                                                            "name": "render",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-inspector.js",
+                                                                            "recursive": true
+                                                                          }
+                                                                        ],
+                                                                        "callees": []
+                                                                      },
+                                                                      {
+                                                                        "id": 13516,
+                                                                        "name": "calculateLineMeta",
+                                                                        "kind": "function",
+                                                                        "path": "static/file-inspector.js",
+                                                                        "callers": [
+                                                                          {
+                                                                            "id": 13508,
+                                                                            "name": "(anonymous) (L1:23)",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-inspector.js",
+                                                                            "recursive": true
+                                                                          },
+                                                                          {
+                                                                            "id": 13523,
+                                                                            "name": "render",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-inspector.js",
+                                                                            "recursive": true
+                                                                          }
+                                                                        ],
+                                                                        "callees": [
+                                                                          {
+                                                                            "id": 13517,
+                                                                            "name": "traverse",
+                                                                            "kind": "function",
+                                                                            "path": "static/file-inspector.js",
+                                                                            "callers": [
+                                                                              {
+                                                                                "id": 13508,
+                                                                                "name": "(anonymous) (L1:23)",
+                                                                                "kind": "function",
+                                                                                "path": "static/file-inspector.js",
+                                                                                "recursive": true
+                                                                              },
+                                                                              {
+                                                                                "id": 13516,
+                                                                                "name": "calculateLineMeta",
+                                                                                "kind": "function",
+                                                                                "path": "static/file-inspector.js",
+                                                                                "recursive": true
+                                                                              },
+                                                                              {
+                                                                                "id": 13518,
+                                                                                "name": "(anonymous) (L67:26)",
+                                                                                "kind": "function",
+                                                                                "path": "static/file-inspector.js",
+                                                                                "callers": [],
+                                                                                "callees": [
+                                                                                  {
+                                                                                    "id": 13517,
+                                                                                    "name": "traverse",
+                                                                                    "kind": "function",
+                                                                                    "path": "static/file-inspector.js",
+                                                                                    "recursive": true
+                                                                                  }
+                                                                                ]
+                                                                              }
+                                                                            ],
+                                                                            "callees": []
+                                                                          }
+                                                                        ]
+                                                                      },
+                                                                      {
+                                                                        "id": 13520,
+                                                                        "name": "layoutTree",
+                                                                        "kind": "function",
+                                                                        "path": "static/file-inspector.js",
+                                                                        "is_reference": true
+                                                                      }
+                                                                    ]
+                                                                  },
+                                                                  {
+                                                                    "id": 13526,
+                                                                    "name": "init",
+                                                                    "kind": "function",
+                                                                    "path": "static/file-inspector.js",
+                                                                    "recursive": true
+                                                                  }
+                                                                ],
+                                                                "callees": []
+                                                              }
+                                                            ]
+                                                          }
+                                                        ],
+                                                        "callees": []
+                                                      },
+                                                      {
+                                                        "id": 13510,
+                                                        "name": "escapeHtml",
+                                                        "kind": "function",
+                                                        "path": "static/file-inspector.js",
+                                                        "is_reference": true
+                                                      },
+                                                      {
+                                                        "id": 13511,
+                                                        "name": "updateVisibleElements",
+                                                        "kind": "function",
+                                                        "path": "static/file-inspector.js",
+                                                        "is_reference": true
+                                                      },
+                                                      {
+                                                        "id": 13513,
+                                                        "name": "buildElementTree",
+                                                        "kind": "function",
+                                                        "path": "static/file-inspector.js",
+                                                        "is_reference": true
+                                                      },
+                                                      {
+                                                        "id": 13516,
+                                                        "name": "calculateLineMeta",
+                                                        "kind": "function",
+                                                        "path": "static/file-inspector.js",
+                                                        "is_reference": true
+                                                      },
+                                                      {
+                                                        "id": 13517,
+                                                        "name": "traverse",
+                                                        "kind": "function",
+                                                        "path": "static/file-inspector.js",
+                                                        "is_reference": true
+                                                      },
+                                                      {
+                                                        "id": 13520,
+                                                        "name": "layoutTree",
+                                                        "kind": "function",
+                                                        "path": "static/file-inspector.js",
+                                                        "is_reference": true
+                                                      },
+                                                      {
+                                                        "id": 13523,
+                                                        "name": "render",
+                                                        "kind": "function",
+                                                        "path": "static/file-inspector.js",
+                                                        "is_reference": true
+                                                      },
+                                                      {
+                                                        "id": 13526,
+                                                        "name": "init",
+                                                        "kind": "function",
+                                                        "path": "static/file-inspector.js",
+                                                        "is_reference": true
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "id": 13526,
+                                                    "name": "init",
+                                                    "kind": "function",
+                                                    "path": "static/file-inspector.js",
+                                                    "is_reference": true
+                                                  }
+                                                ],
+                                                "callees": [
+                                                  {
+                                                    "id": 13480,
+                                                    "name": "switchLayout",
+                                                    "kind": "function",
+                                                    "path": "static/file-overview.js",
+                                                    "is_reference": true
+                                                  },
+                                                  {
+                                                    "id": 13526,
+                                                    "name": "init",
+                                                    "kind": "function",
+                                                    "path": "static/file-inspector.js",
+                                                    "is_reference": true
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "id": 13480,
+                                                "name": "switchLayout",
+                                                "kind": "function",
+                                                "path": "static/file-overview.js",
+                                                "is_reference": true
+                                              },
+                                              {
+                                                "id": 13481,
+                                                "name": "render",
+                                                "kind": "function",
+                                                "path": "static/file-overview.js",
+                                                "recursive": true
+                                              },
+                                              {
+                                                "id": 13485,
+                                                "name": "renderLayoutByKind",
+                                                "kind": "function",
+                                                "path": "static/file-overview.js",
+                                                "callers": [
+                                                  {
+                                                    "id": 13476,
+                                                    "name": "(anonymous) (L1:22)",
+                                                    "kind": "function",
+                                                    "path": "static/file-overview.js",
+                                                    "recursive": true
+                                                  },
+                                                  {
+                                                    "id": 13481,
+                                                    "name": "render",
+                                                    "kind": "function",
+                                                    "path": "static/file-overview.js",
+                                                    "recursive": true
+                                                  }
+                                                ],
+                                                "callees": [
+                                                  {
+                                                    "id": 13499,
+                                                    "name": "renderNodes",
+                                                    "kind": "function",
+                                                    "path": "static/file-overview.js",
+                                                    "callers": [
+                                                      {
+                                                        "id": 13476,
+                                                        "name": "(anonymous) (L1:22)",
+                                                        "kind": "function",
+                                                        "path": "static/file-overview.js",
+                                                        "recursive": true
+                                                      },
+                                                      {
+                                                        "id": 13485,
+                                                        "name": "renderLayoutByKind",
+                                                        "kind": "function",
+                                                        "path": "static/file-overview.js",
+                                                        "recursive": true
+                                                      },
+                                                      {
+                                                        "id": 13494,
+                                                        "name": "renderLayoutByPosition",
+                                                        "kind": "function",
+                                                        "path": "static/file-overview.js",
+                                                        "callers": [
+                                                          {
+                                                            "id": 13476,
+                                                            "name": "(anonymous) (L1:22)",
+                                                            "kind": "function",
+                                                            "path": "static/file-overview.js",
+                                                            "recursive": true
+                                                          },
+                                                          {
+                                                            "id": 13481,
+                                                            "name": "render",
+                                                            "kind": "function",
+                                                            "path": "static/file-overview.js",
+                                                            "recursive": true
+                                                          }
+                                                        ],
+                                                        "callees": [
+                                                          {
+                                                            "id": 13499,
+                                                            "name": "renderNodes",
+                                                            "kind": "function",
+                                                            "path": "static/file-overview.js",
+                                                            "recursive": true
+                                                          }
+                                                        ]
+                                                      }
+                                                    ],
+                                                    "callees": []
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "id": 13494,
+                                                "name": "renderLayoutByPosition",
+                                                "kind": "function",
+                                                "path": "static/file-overview.js",
+                                                "is_reference": true
+                                              },
+                                              {
+                                                "id": 13499,
+                                                "name": "renderNodes",
+                                                "kind": "function",
+                                                "path": "static/file-overview.js",
+                                                "is_reference": true
+                                              },
+                                              {
+                                                "id": 13523,
+                                                "name": "render",
+                                                "kind": "function",
+                                                "path": "static/file-inspector.js",
+                                                "is_reference": true
+                                              },
+                                              {
+                                                "id": 13526,
+                                                "name": "init",
+                                                "kind": "function",
+                                                "path": "static/file-inspector.js",
+                                                "is_reference": true
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "id": 13480,
+                                            "name": "switchLayout",
+                                            "kind": "function",
+                                            "path": "static/file-overview.js",
+                                            "is_reference": true
+                                          },
+                                          {
+                                            "id": 13508,
+                                            "name": "(anonymous) (L1:23)",
+                                            "kind": "function",
+                                            "path": "static/file-inspector.js",
+                                            "is_reference": true
+                                          },
+                                          {
+                                            "id": 13523,
+                                            "name": "render",
+                                            "kind": "function",
+                                            "path": "static/file-inspector.js",
+                                            "is_reference": true
+                                          }
+                                        ],
+                                        "callees": [
+                                          {
+                                            "id": 13485,
+                                            "name": "renderLayoutByKind",
+                                            "kind": "function",
+                                            "path": "static/file-overview.js",
+                                            "is_reference": true
+                                          },
+                                          {
+                                            "id": 13494,
+                                            "name": "renderLayoutByPosition",
+                                            "kind": "function",
+                                            "path": "static/file-overview.js",
+                                            "is_reference": true
+                                          },
+                                          {
+                                            "id": 13523,
+                                            "name": "render",
+                                            "kind": "function",
+                                            "path": "static/file-inspector.js",
+                                            "is_reference": true
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "id": 13523,
+                                        "name": "render",
+                                        "kind": "function",
+                                        "path": "static/file-inspector.js",
+                                        "is_reference": true
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "callees": [
+                                  {
+                                    "id": 13481,
+                                    "name": "render",
+                                    "kind": "function",
+                                    "path": "static/file-overview.js",
+                                    "is_reference": true
+                                  },
+                                  {
+                                    "id": 13523,
+                                    "name": "render",
+                                    "kind": "function",
+                                    "path": "static/file-inspector.js",
+                                    "is_reference": true
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "id": 13451,
+                        "name": "fetchFilesForProject",
+                        "kind": "function",
+                        "path": "static/app.js",
+                        "is_reference": true
+                      },
+                      {
+                        "id": 13460,
+                        "name": "updateAllViews",
+                        "kind": "function",
+                        "path": "static/app.js",
+                        "is_reference": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": 13451,
+                "name": "fetchFilesForProject",
+                "kind": "function",
+                "path": "static/app.js",
+                "is_reference": true
+              },
+              {
+                "id": 13453,
+                "name": "handleFileSelection",
+                "kind": "function",
+                "path": "static/app.js",
+                "is_reference": true
+              },
+              {
+                "id": 13454,
+                "name": "parseProject",
+                "kind": "function",
+                "path": "static/app.js",
+                "recursive": true
+              }
+            ],
+            "callees": []
+          },
+          {
+            "id": 13445,
+            "name": "fetchProjects",
+            "kind": "function",
+            "path": "static/app.js",
+            "is_reference": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "workflow_name": "GET /api/files/{VAR}",
+    "endpoint": {
+      "id": 13649,
+      "name": "get_file_details (L12)",
+      "kind": "function",
+      "path": "api/files.py"
+    },
+    "python_trace": {
+      "id": 13649,
+      "name": "get_file_details (L12)",
+      "kind": "function",
+      "path": "api/files.py",
+      "is_reference": true
+    },
+    "javascript_trace": [
+      {
+        "id": 13453,
+        "name": "handleFileSelection",
+        "kind": "function",
+        "path": "static/app.js",
+        "is_reference": true
+      }
+    ]
+  },
+  {
+    "workflow_name": "GET /api/projects/{VAR}/parsing_status",
+    "endpoint": {
+      "id": 13663,
+      "name": "get_project_parsing_status (L44)",
+      "kind": "function",
+      "path": "api/projects.py"
+    },
+    "python_trace": {
+      "id": 13663,
+      "name": "get_project_parsing_status (L44)",
+      "kind": "function",
+      "path": "api/projects.py",
+      "is_reference": true
+    },
+    "javascript_trace": [
+      {
+        "id": 13448,
+        "name": "checkProjectParsingStatus",
+        "kind": "function",
+        "path": "static/app.js",
+        "is_reference": true
+      }
+    ]
+  },
+  {
+    "workflow_name": "GET /api/projects/{VAR}/files",
+    "endpoint": {
+      "id": 13664,
+      "name": "list_files_for_project (L105)",
+      "kind": "function",
+      "path": "api/projects.py"
+    },
+    "python_trace": {
+      "id": 13664,
+      "name": "list_files_for_project (L105)",
+      "kind": "function",
+      "path": "api/projects.py",
+      "is_reference": true
+    },
+    "javascript_trace": [
+      {
+        "id": 13451,
+        "name": "fetchFilesForProject",
+        "kind": "function",
+        "path": "static/app.js",
+        "is_reference": true
+      }
+    ]
+  },
+  {
+    "workflow_name": "GET /api/projects",
+    "endpoint": {
+      "id": 13665,
+      "name": "list_projects (L128)",
+      "kind": "function",
+      "path": "api/projects.py"
+    },
+    "python_trace": {
+      "id": 13665,
+      "name": "list_projects (L128)",
+      "kind": "function",
+      "path": "api/projects.py",
+      "is_reference": true
+    },
+    "javascript_trace": [
+      {
+        "id": 13445,
+        "name": "fetchProjects",
+        "kind": "function",
+        "path": "static/app.js",
+        "is_reference": true
+      }
+    ]
+  }
+]

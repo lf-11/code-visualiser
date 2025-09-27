@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateAllViews() {
         FileInspector.render(currentFileDetails);
         FileOverview.render(currentFileDetails);
-        // Workflow view will be added later
+        WorkflowOverview.render();
     }
 
 
@@ -334,5 +334,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- INITIALIZATION ---
     FileInspector.init();
     FileOverview.init();
+    WorkflowOverview.init();
     fetchProjects();
 }); 

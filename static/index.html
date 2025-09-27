@@ -81,14 +81,24 @@
         </div>
 
         <div id="tab-workflow" class="tab-content">
-            <h2>Workflow Overview</h2>
-            <p>This feature is coming soon.</p>
+            <div class="view-controls" id="workflow-controls">
+                <div class="control-group">
+                    <label for="workflow-select">Workflow:</label>
+                    <select id="workflow-select">
+                        <option>Loading workflows...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="canvas-container" id="workflow-canvas-container">
+                <!-- D3.js will render the SVG here -->
+            </div>
         </div>
     </main>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="/static/file-inspector.js"></script>
     <script src="/static/file-overview.js"></script>
+    <script src="/static/workflow-overview.js"></script>
     <script src="/static/app.js"></script>
 </body>
 </html> 

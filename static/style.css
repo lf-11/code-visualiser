@@ -503,3 +503,119 @@ button:disabled {
     font-size: 8px;
     fill: #444;
 }
+
+/* --- Workflow Overview --- */
+.workflow-container {
+    overflow-y: auto;
+    height: 100%;
+    padding-right: 1rem; /* for scrollbar */
+}
+
+.workflow-item {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.5rem;
+}
+
+.workflow-item h2 {
+    margin-top: 0;
+    color: var(--accent-ok);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.trace-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.trace-column h3 {
+    color: var(--accent-color);
+    margin-top: 0;
+    font-size: 1.1em;
+}
+
+.trace-tree {
+    list-style: none;
+    padding-left: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+}
+
+.trace-tree li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 4px;
+}
+
+.trace-tree li::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 0;
+    width: 10px;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.trace-tree li::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+    background: var(--border-color);
+}
+
+.trace-tree li:last-child::after {
+    height: 8px; /* Connect to the bullet point */
+}
+
+.trace-tree ul {
+    padding-left: 20px;
+    margin-top: 4px;
+}
+
+.trace-name {
+    color: var(--text-primary);
+}
+
+.trace-path {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+/* --- D3 Tree Diagram --- */
+#workflow-canvas-container {
+    overflow: auto;
+}
+
+.node circle {
+    stroke-width: 2px;
+    stroke: var(--border-color);
+}
+
+.node text {
+    font-size: 11px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    fill: var(--text-primary);
+}
+.node .name {
+    font-weight: bold;
+}
+.node .path {
+    font-size: 9px;
+    fill: var(--text-secondary);
+}
+
+.link {
+    fill: none;
+    stroke: var(--border-color);
+    stroke-opacity: 0.6;
+    stroke-width: 1.5px;
+}

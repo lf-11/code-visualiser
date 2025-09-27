@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from dotenv import load_dotenv
@@ -24,4 +24,12 @@ def shutdown_event():
 
 @app.get("/", include_in_schema=False)
 async def read_index():
-    return FileResponse('static/index.html') 
+    return FileResponse('static/index.html')
+
+@app.get("/workflow_trace.json", include_in_schema=False)
+async def read_workflow_trace():
+    return FileResponse('workflow_trace.json')
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return Response(status_code=204)
